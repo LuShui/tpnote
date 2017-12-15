@@ -1,0 +1,60 @@
+<!-- 头部导航 -->
+<include file="Public/head" /> 
+
+<!--导航栏-->
+<include file="Public/left" /> 
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+      <form action="/Article/checkAll" method="post" >
+        <h1 class="page-header">操作</h1>
+        <ol class="breadcrumb">
+          <li><a href="{:U('Home/Admin/addnote')}">增加文章</a></li>
+        </ol>
+        <h1 class="page-header">管理 <span class="badge"></span></h1>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>  
+                <th> <span class="visible-lg">文章标题</span></th>
+                <th> <span class="visible-lg">文章描述</span></th>
+                <th class="hidden-sm"></span> <span class="visible-lg">类型</span></th>
+                <th class="hidden-sm"></span> <span class="visible-lg">查看次数</span></th>
+                <th><span class="visible-lg">添加日期</span></th>
+                <th></span> <span class="visible-lg">操作</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <foreach name="list" item="json" >
+                <tr>
+                  <td class="article-title">{$json.title}</td>
+                  <td>{$json.des}</td>
+                  <td class="hidden-sm">
+                    <switch name="json.type">    
+                      <case value="1">Javascript</case>    
+                      <case value="2">html</case>
+                      <case value="3">css</case>    
+                      <case value="4">构建工具</case>    
+                      <case value="5">js插件</case>    
+                      <case value="6">php</case>
+                      <default />default
+                    </switch>    
+                  </td>
+                  <td class="hidden-sm">{$json.num}</td>
+                  <td>{$json.addtime|date="Y-m-d",###}</td>
+                  <td>
+                    <a href="editnote/id/{$json.id}">修改</a> 
+                    <a href="changestaue/id/{$json.id}" rel="6">删除</a>
+                  </td>
+                </tr>
+              </foreach>
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+</section>
+
+<script src="__PUBLIC__/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/js/admin-scripts.js"></script>
+</body>
+</html>
